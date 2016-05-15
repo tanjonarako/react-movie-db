@@ -4,6 +4,28 @@ import { connect } from 'react-redux'
 import '../main.scss';
 
 @connect(
+  (state) => {
+    return {
+      movies: state.movies
+    }
+  }
+)
+class List extends Component {
+  render() {
+    const movies = this.props.movies
+    return (
+      <ul>
+        {movies.map((movie, index) => {
+          return <li key={index}>{movie}</li>
+        })}
+      </ul>
+    )
+  }
+}
+
+List.defaultProps = { movies: []}
+
+@connect(
   (state) => ({
     counter: state.counter
   })
