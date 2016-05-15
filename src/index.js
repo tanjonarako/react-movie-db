@@ -3,9 +3,14 @@ import {render} from 'react-dom';
 import App from 'compo/App';
 import { Provider } from 'react-redux'
 
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import todoApp from './reducers/index'
-let store = createStore(todoApp, {movies: ["Naruto", "One piece", "Kuroko", "Mirror challenge"], counter: 1})
+import todoMiddlewares from './middlewares/index'
+let store = createStore(todoApp, {
+  movies: [],
+  counter: 1,
+  users: []
+}, applyMiddleware(todoMiddlewares))
 
 render (
   <Provider store={store}>

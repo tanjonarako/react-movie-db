@@ -8,15 +8,26 @@ import '../main.scss';
     return {
       movies: state.movies
     }
-  }
+  },
+  (dispatch) => ({
+    getMovies: () => dispatch({
+      type: "getMovies",
+      request: {
+        url: 'https://api.themoviedb.org/3/movie/popular?api_key=61a7fe0a2defc2d41f21253258bf6a4e'
+      }
+    })
+  })
 )
 class List extends Component {
+  componentDidMount() {
+    this.props.getMovies()
+  }
   render() {
     const movies = this.props.movies
     return (
       <ul>
-        {movies.map((movie, index) => {
-          return <li key={index}>{movie}</li>
+        {movies.map((movie) => {
+          return <li key={movie.id}>{movie.title}</li>
         })}
       </ul>
     )
@@ -24,6 +35,39 @@ class List extends Component {
 }
 
 List.defaultProps = { movies: []}
+
+@connect(
+  (state) => {
+    return {
+      users: state.users
+    }
+  },
+  (dispatch) => ({
+    getUsers: (limit) => dispatch({
+      type: "getUsers",
+      request: {
+        url: "https://randomuser.me/api/?results=" + limit
+      }
+    })
+  })
+)
+class ListUsers extends Component {
+  componentDidMount() {
+    this.props.getUsers(20)
+  }
+  render() {
+    const users = this.props.users
+    return (
+      <ul>
+        {users.map((user) => {
+          return <li key={user.email}>{user.name.first}</li>
+        })}
+      </ul>
+    )
+  }
+}
+
+ListUsers.defaultProps = { users: []}
 
 @connect(
   (state) => ({
@@ -80,6 +124,7 @@ class App extends Component {
         <button onClick={() =>
           decrement()
         }>Decrement</button>
+        <ListUsers/>
       </div>
     )
   }

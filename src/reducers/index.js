@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux'
 
 const moviesReducer = (state = [], action) => {
+  if (action.type == "getMovies_SUCCESS") {
+    return [...state, ...action.data.results]
+  }
   if (action.type == "push") {
     return [...state, action.data]
   }
@@ -17,8 +20,15 @@ const counterReducer = (state = 0, action) => {
   return state
 }
 
+const userReducer = (state = [], action) => {
+  if (action.type == "getUsers_SUCCESS") {
+    return [...state, ...action.data.results]
+  }
+  return state
+}
 
 export default combineReducers({
   movies: moviesReducer,
-  counter: counterReducer
+  counter: counterReducer,
+  users: userReducer,
 })
