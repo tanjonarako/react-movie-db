@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 @connect(
   (state) => {
@@ -18,9 +19,18 @@ import { connect } from 'react-redux'
   })
 )
 class ListUsers extends Component {
+  counter = this.props.counter
+
   componentDidMount() {
-    this.props.getUsers(20)
+    this.props.getUsers(this.counter)
   }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.counter !== this.props.counter) {
+      this.props.getUsers(nextProps.counter)
+    }
+  }
+
   render() {
     const users = this.props.users
     return (

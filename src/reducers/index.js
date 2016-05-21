@@ -22,7 +22,7 @@ const counterReducer = (state = 0, action) => {
 
 const userReducer = (state = [], action) => {
   if (action.type == "getUsers_SUCCESS") {
-    return [...state, ...action.data.results]
+    return action.data.results
   }
   return state
 }
