@@ -18,6 +18,10 @@ import { connect } from 'react-redux'
       request: {
         url: 'https://api.themoviedb.org/3/movie/popular?api_key=61a7fe0a2defc2d41f21253258bf6a4e'
       }
+    }),
+    fav: (id) => dispatch({
+      type: "addToFav",
+      data: id
     })
   })
 )
@@ -27,10 +31,11 @@ class List extends Component {
   }
   render() {
     const movies = this.props.movies
+    const fav = this.props.fav
     return (
       <ul>
         {movies.map((movie) => {
-          return <li key={movie.id}>{movie.title}</li>
+          return <li key={movie.id}>{movie.title}<button onClick={() => fav(movie.id)}>Fav</button></li>
         })}
       </ul>
     )

@@ -31,9 +31,17 @@ const searchReducer = (state = '', action) => {
   return state
 }
 
+const favReducer = (state = [], action) => {
+  if (action.type == "addToFav") {
+    return [...state, action.data]
+  }
+  return state
+}
+
 export default combineReducers({
   movies: moviesReducer,
   counter: counterReducer,
   users: userReducer,
   searchTerm: searchReducer,
+  favourites: favReducer,
 })

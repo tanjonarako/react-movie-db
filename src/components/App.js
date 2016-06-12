@@ -4,6 +4,7 @@ import Search from 'components/Search'
 import List from 'components/List';
 import ListUsers from 'components/ListUsers';
 import Counter from 'components/Counter';
+import Favourite from 'components/Favourite';
 
 import '../main.scss';
 
@@ -26,6 +27,7 @@ class App extends Component {
       <div>
         <Search/>
         <List/>
+        <Favourite/>
         <Counter/>
         <button onClick={this.handlePush}>Push</button>
         <button onClick={() =>

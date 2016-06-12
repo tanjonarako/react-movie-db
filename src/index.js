@@ -11,7 +11,8 @@ const initialState = {
   movies: [],
   counter: 1,
   users: [],
-  searchTerm: ''
+  searchTerm: '',
+  favourites: []
 };
 
 let store = createStore(todoAppReducers, initialState, applyMiddleware(todoMiddlewares))
