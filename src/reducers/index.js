@@ -4,9 +4,6 @@ const moviesReducer = (state = [], action) => {
   if (action.type == "getMovies_SUCCESS") {
     return [...state, ...action.data.results]
   }
-  if (action.type == "push") {
-    return [...state, action.data]
-  }
   return state
 }
 
@@ -27,8 +24,16 @@ const userReducer = (state = [], action) => {
   return state
 }
 
+const searchReducer = (state = '', action) => {
+  if (action.type == "search") {
+    return action.data
+  }
+  return state
+}
+
 export default combineReducers({
   movies: moviesReducer,
   counter: counterReducer,
   users: userReducer,
+  searchTerm: searchReducer,
 })

@@ -4,13 +4,17 @@ import App from 'compo/App';
 import { Provider } from 'react-redux'
 
 import { createStore, applyMiddleware } from 'redux'
-import todoApp from './reducers/index'
+import todoAppReducers from './reducers/index'
 import todoMiddlewares from './middlewares/index'
-let store = createStore(todoApp, {
+
+const initialState = {
   movies: [],
   counter: 1,
-  users: []
-}, applyMiddleware(todoMiddlewares))
+  users: [],
+  searchTerm: ''
+};
+
+let store = createStore(todoAppReducers, initialState, applyMiddleware(todoMiddlewares))
 
 render (
   <Provider store={store}>

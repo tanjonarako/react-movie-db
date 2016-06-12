@@ -5,7 +5,11 @@ import { connect } from 'react-redux'
 @connect(
   (state) => {
     return {
-      movies: state.movies
+      movies: state.movies.filter((movie) => {
+        if (movie.title.indexOf(state.searchTerm) > -1)
+        return true;
+        else return false;
+      } ),
     }
   },
   (dispatch) => ({
