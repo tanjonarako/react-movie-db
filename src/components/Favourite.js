@@ -8,9 +8,16 @@ import { connect } from 'react-redux'
       favourites: state.favourites,
     }
   },
-  (dispatch) => ({})
+  (dispatch) => ({
+    getFav: () => dispatch({
+      type: "getFav"
+    })
+  })
 )
 class Favourite extends Component {
+  componentDidMount() {
+    this.props.getFav()
+  }
   render() {
     const favourites = this.props.favourites
     return (

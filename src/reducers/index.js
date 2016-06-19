@@ -33,7 +33,13 @@ const searchReducer = (state = '', action) => {
 
 const favReducer = (state = [], action) => {
   if (action.type == "addToFav") {
+    localStorage["id"] = JSON.stringify(state);
     return [...state, action.data]
+  }
+
+  if (action.type == "getFav") {
+    var storedId = JSON.parse(localStorage["id"]);
+    return [...state, ...storedId]
   }
   return state
 }
