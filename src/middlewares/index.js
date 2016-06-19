@@ -9,9 +9,13 @@ const app = store => next => action => {
     })
       .then(response => response.json())
       .then(response => {
-        const successAction = {data: response, type: `${action.type}_SUCCESS`}
-        console.log('[REMOTE] fetch success', successAction)
-        next(successAction)
+        localStorage["data"] = JSON.stringify(response);
+        var storedDatas = JSON.parse(localStorage["data"]);
+        if (storedDatas){
+          const successAction = {data: storedDatas, type: `${action.type}_SUCCESS`}
+          console.log('[REMOTE] fetch success', successAction)
+          next(successAction)
+        }
       })
   }
   return next(action)
