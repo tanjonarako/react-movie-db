@@ -17,7 +17,6 @@ class Search extends Component {
     this.props.searchAction(this.myInput.value)
   }
   render() {
-    const movies = this.props.movies
     return (
       <form onSubmit={this.handleSubmit}>
         <input type="text"  ref={ (input) => { this.myInput = input } } />

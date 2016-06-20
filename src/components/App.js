@@ -29,7 +29,6 @@ class App extends Component {
         <List/>
         <Favourite/>
         <Counter/>
-        <button onClick={this.handlePush}>Push</button>
         <button onClick={() =>
           increment()
         }>Increment</button>
