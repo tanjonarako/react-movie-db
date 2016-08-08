@@ -18,10 +18,16 @@ class Search extends Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text"  ref={ (input) => { this.myInput = input } } />
-        <button type="submit">Search</button>
-      </form>
+      <div className="row">
+        <div className="col-md-8">
+          <form className="form-inline" onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <input id="inputSearch" className="form-control" type="text" placeholder="Search" ref={ (input) => { this.myInput = input } } />
+            </div>
+            <button type="submit" className="btn btn-default"><i className="fa fa-search" aria-hidden="true"></i></button>
+          </form>
+        </div>
+      </div>
     )
   }
 }

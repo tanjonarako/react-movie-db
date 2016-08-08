@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import Search from 'components/Search'
+import Filter from 'components/Filter'
 import List from 'components/List';
 import ListUsers from 'components/ListUsers';
 import Counter from 'components/Counter';
@@ -24,8 +25,9 @@ class App extends Component {
   render() {
     const {addMovie, increment, decrement} = this.props
     return (
-      <div>
+      <div className="container">
         <Search/>
+        <Filter/>
         <List/>
         <Favourite/>
         <Counter/>

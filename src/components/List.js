@@ -1,22 +1,49 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 
+const filterMovies = (state) => {
+
+  if(state.searchTerm != '') {
+
+    return state.movies.filter((movie) => {
+      if (movie.title.indexOf(state.searchTerm) > -1) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    });
+
+  }
+
+  else if(state.filterTerm != '') {
+
+    return state.movies.filter((movie) => {
+      if (movie.genres.indexOf(state.filterTerm) > -1) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    });
+
+  } else {
+    return state.movies;
+  }
+
+};
 
 @connect(
   (state) => {
     return {
-      movies: state.movies.filter((movie) => {
-        if (movie.title.indexOf(state.searchTerm) > -1)
-        return true;
-        else return false;
-      } ),
+      movies: filterMovies(state),
     }
   },
   (dispatch) => ({
     getMovies: () => dispatch({
       type: "getMovies",
       request: {
-        url: 'https://api.themoviedb.org/3/movie/popular?api_key=61a7fe0a2defc2d41f21253258bf6a4e'
+        url: 'https://yts.ag/api/v2/list_movies.json'
       }
     }),
     fav: (id) => dispatch({
@@ -31,13 +58,28 @@ class List extends Component {
   }
   render() {
     const movies = this.props.movies
-    const fav = this.props.fav
     return (
-      <ul>
+      <div className="row">
         {movies.map((movie) => {
-          return <li key={movie.id}>{movie.title}<button onClick={() => fav(movie.id)}>Fav</button></li>
+          return (
+            <div className="col-md-4 bloc-movie" key={movie.id}>
+              <div className="row">
+                <div className="col-md-12">
+                  <img src={movie.medium_cover_image} className="img-thumbnail"/>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-6">
+                  {movie.title}
+                </div>
+                <div className="col-md-2">
+                  <button onClick={() => fav(movie.id)}>Fav</button>
+                </div>
+              </div>
+            </div>
+          )
         })}
-      </ul>
+      </div>
     )
   }
 }

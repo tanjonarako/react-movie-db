@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 
 const moviesReducer = (state = [], action) => {
   if (action.type == "getMovies_SUCCESS") {
-    return [...state, ...action.data.results]
+    return [...state, ...action.data.data.movies]
   }
   return state
 }
@@ -31,6 +31,14 @@ const searchReducer = (state = '', action) => {
   return state
 }
 
+const filterReducer = (state = '', action) => {
+  if (action.type == "filter") {
+    return action.data
+  }
+  return state
+}
+
+
 const favReducer = (state = [], action) => {
   if (action.type == "addToFav") {
     localStorage["id"] = JSON.stringify(state);
@@ -49,5 +57,6 @@ export default combineReducers({
   counter: counterReducer,
   users: userReducer,
   searchTerm: searchReducer,
+  filterTerm: filterReducer,
   favourites: favReducer,
 })
